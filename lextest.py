@@ -3,9 +3,9 @@ import ply.lex as lex
 
 
 tokens = (
-    'LPAREN',
+    #'LPAREN',
     'OBJECT',
-    'RPAREN',
+    #'RPAREN',
     'KEY',
     'STRING',
     'COMMENT',
@@ -16,9 +16,9 @@ tokens = (
     'BOOLEAN'
 )
 
-literals = '-:.",'
+literals = '-:.",[]'
 
-t_ignore = ' \t\n=,'
+t_ignore = ' \t\n=,[]'
 
 def t_BOOLEAN(t): r'TRUE|FALSE|true|false'; return t
 def t_IP(t): r'\"\d+\.\d+\.\d+\.\d+\"'; return t
@@ -27,10 +27,10 @@ def t_TIME(t): r'\d+\:\d+\:\d+'; return t
 def t_NUM(t): r'\d+'; return t
 def t_COMMENT(t): r'\#\s.*'; return t
 def t_KEY(t): r'[a-z]+\D?[a-z]+\s'; return t
-def t_LPAREN(t): r'\[' ; return t
+#def t_LPAREN(t): r'\[' ; return t
 def t_STRING(t): r'\".+\"'; return t
 def t_OBJECT(t): r'[a-z]*\.?[a-z]+'; return t
-def t_RPAREN(t): r'\]' ; return t
+#def t_RPAREN(t): r'\]' ; return t
 
 
 

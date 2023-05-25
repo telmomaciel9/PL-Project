@@ -19,10 +19,10 @@
       "beta": {
         "ip": "10.0.0.2",
         "dc": "eqdc10"
-      },
-      "hosts": [
-          "alpha",
-          "omega"
-        ]
-    }
+      }
+    },
+    "hosts": [
+        "alpha",
+        "omega"
+    ]
 }  
