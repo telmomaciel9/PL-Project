@@ -1,0 +1,411 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> FT
+Rule 1     FT -> Linha FT
+Rule 2     FT -> <empty>
+Rule 3     Linha -> Atributo
+Rule 4     Linha -> Objeto
+Rule 5     Linha -> COMMENT
+Rule 6     Atributo -> KEY = Valor
+Rule 7     Objeto -> [ OBJECT ]
+Rule 8     Valor -> STRING
+Rule 9     Valor -> BOOLEAN
+Rule 10    Valor -> IP
+Rule 11    Valor -> NUM
+Rule 12    Valor -> DATE
+Rule 13    Valor -> TIME
+Rule 14    Valor -> List
+Rule 15    List -> [ LCont
+Rule 16    LCont -> ]
+Rule 17    LCont -> Conteudo ]
+Rule 18    Conteudo -> Valor Cont2
+Rule 19    Cont2 -> , Conteudo
+Rule 20    Cont2 -> <empty>
+
+Terminals, with rules where they appear
+
+,                    : 19
+=                    : 6
+BOOLEAN              : 9
+COMMENT              : 5
+DATE                 : 12
+IP                   : 10
+KEY                  : 6
+NUM                  : 11
+OBJECT               : 7
+STRING               : 8
+TIME                 : 13
+[                    : 7 15
+]                    : 7 16 17
+error                : 
+
+Nonterminals, with rules where they appear
+
+Atributo             : 3
+Cont2                : 18
+Conteudo             : 17 19
+FT                   : 1 0
+LCont                : 15
+Linha                : 1
+List                 : 14
+Objeto               : 4
+Valor                : 6 18
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . FT
+    (1) FT -> . Linha FT
+    (2) FT -> .
+    (3) Linha -> . Atributo
+    (4) Linha -> . Objeto
+    (5) Linha -> . COMMENT
+    (6) Atributo -> . KEY = Valor
+    (7) Objeto -> . [ OBJECT ]
+
+    $end            reduce using rule 2 (FT -> .)
+    COMMENT         shift and go to state 5
+    KEY             shift and go to state 6
+    [               shift and go to state 7
+
+    FT                             shift and go to state 1
+    Linha                          shift and go to state 2
+    Atributo                       shift and go to state 3
+    Objeto                         shift and go to state 4
+
+state 1
+
+    (0) S' -> FT .
+
+
+
+state 2
+
+    (1) FT -> Linha . FT
+    (1) FT -> . Linha FT
+    (2) FT -> .
+    (3) Linha -> . Atributo
+    (4) Linha -> . Objeto
+    (5) Linha -> . COMMENT
+    (6) Atributo -> . KEY = Valor
+    (7) Objeto -> . [ OBJECT ]
+
+    $end            reduce using rule 2 (FT -> .)
+    COMMENT         shift and go to state 5
+    KEY             shift and go to state 6
+    [               shift and go to state 7
+
+    Linha                          shift and go to state 2
+    FT                             shift and go to state 8
+    Atributo                       shift and go to state 3
+    Objeto                         shift and go to state 4
+
+state 3
+
+    (3) Linha -> Atributo .
+
+    COMMENT         reduce using rule 3 (Linha -> Atributo .)
+    KEY             reduce using rule 3 (Linha -> Atributo .)
+    [               reduce using rule 3 (Linha -> Atributo .)
+    $end            reduce using rule 3 (Linha -> Atributo .)
+
+
+state 4
+
+    (4) Linha -> Objeto .
+
+    COMMENT         reduce using rule 4 (Linha -> Objeto .)
+    KEY             reduce using rule 4 (Linha -> Objeto .)
+    [               reduce using rule 4 (Linha -> Objeto .)
+    $end            reduce using rule 4 (Linha -> Objeto .)
+
+
+state 5
+
+    (5) Linha -> COMMENT .
+
+    COMMENT         reduce using rule 5 (Linha -> COMMENT .)
+    KEY             reduce using rule 5 (Linha -> COMMENT .)
+    [               reduce using rule 5 (Linha -> COMMENT .)
+    $end            reduce using rule 5 (Linha -> COMMENT .)
+
+
+state 6
+
+    (6) Atributo -> KEY . = Valor
+
+    =               shift and go to state 9
+
+
+state 7
+
+    (7) Objeto -> [ . OBJECT ]
+
+    OBJECT          shift and go to state 10
+
+
+state 8
+
+    (1) FT -> Linha FT .
+
+    $end            reduce using rule 1 (FT -> Linha FT .)
+
+
+state 9
+
+    (6) Atributo -> KEY = . Valor
+    (8) Valor -> . STRING
+    (9) Valor -> . BOOLEAN
+    (10) Valor -> . IP
+    (11) Valor -> . NUM
+    (12) Valor -> . DATE
+    (13) Valor -> . TIME
+    (14) Valor -> . List
+    (15) List -> . [ LCont
+
+    STRING          shift and go to state 12
+    BOOLEAN         shift and go to state 13
+    IP              shift and go to state 14
+    NUM             shift and go to state 15
+    DATE            shift and go to state 16
+    TIME            shift and go to state 17
+    [               shift and go to state 19
+
+    Valor                          shift and go to state 11
+    List                           shift and go to state 18
+
+state 10
+
+    (7) Objeto -> [ OBJECT . ]
+
+    ]               shift and go to state 20
+
+
+state 11
+
+    (6) Atributo -> KEY = Valor .
+
+    COMMENT         reduce using rule 6 (Atributo -> KEY = Valor .)
+    KEY             reduce using rule 6 (Atributo -> KEY = Valor .)
+    [               reduce using rule 6 (Atributo -> KEY = Valor .)
+    $end            reduce using rule 6 (Atributo -> KEY = Valor .)
+
+
+state 12
+
+    (8) Valor -> STRING .
+
+    COMMENT         reduce using rule 8 (Valor -> STRING .)
+    KEY             reduce using rule 8 (Valor -> STRING .)
+    [               reduce using rule 8 (Valor -> STRING .)
+    $end            reduce using rule 8 (Valor -> STRING .)
+    ,               reduce using rule 8 (Valor -> STRING .)
+    ]               reduce using rule 8 (Valor -> STRING .)
+
+
+state 13
+
+    (9) Valor -> BOOLEAN .
+
+    COMMENT         reduce using rule 9 (Valor -> BOOLEAN .)
+    KEY             reduce using rule 9 (Valor -> BOOLEAN .)
+    [               reduce using rule 9 (Valor -> BOOLEAN .)
+    $end            reduce using rule 9 (Valor -> BOOLEAN .)
+    ,               reduce using rule 9 (Valor -> BOOLEAN .)
+    ]               reduce using rule 9 (Valor -> BOOLEAN .)
+
+
+state 14
+
+    (10) Valor -> IP .
+
+    COMMENT         reduce using rule 10 (Valor -> IP .)
+    KEY             reduce using rule 10 (Valor -> IP .)
+    [               reduce using rule 10 (Valor -> IP .)
+    $end            reduce using rule 10 (Valor -> IP .)
+    ,               reduce using rule 10 (Valor -> IP .)
+    ]               reduce using rule 10 (Valor -> IP .)
+
+
+state 15
+
+    (11) Valor -> NUM .
+
+    COMMENT         reduce using rule 11 (Valor -> NUM .)
+    KEY             reduce using rule 11 (Valor -> NUM .)
+    [               reduce using rule 11 (Valor -> NUM .)
+    $end            reduce using rule 11 (Valor -> NUM .)
+    ,               reduce using rule 11 (Valor -> NUM .)
+    ]               reduce using rule 11 (Valor -> NUM .)
+
+
+state 16
+
+    (12) Valor -> DATE .
+
+    COMMENT         reduce using rule 12 (Valor -> DATE .)
+    KEY             reduce using rule 12 (Valor -> DATE .)
+    [               reduce using rule 12 (Valor -> DATE .)
+    $end            reduce using rule 12 (Valor -> DATE .)
+    ,               reduce using rule 12 (Valor -> DATE .)
+    ]               reduce using rule 12 (Valor -> DATE .)
+
+
+state 17
+
+    (13) Valor -> TIME .
+
+    COMMENT         reduce using rule 13 (Valor -> TIME .)
+    KEY             reduce using rule 13 (Valor -> TIME .)
+    [               reduce using rule 13 (Valor -> TIME .)
+    $end            reduce using rule 13 (Valor -> TIME .)
+    ,               reduce using rule 13 (Valor -> TIME .)
+    ]               reduce using rule 13 (Valor -> TIME .)
+
+
+state 18
+
+    (14) Valor -> List .
+
+    COMMENT         reduce using rule 14 (Valor -> List .)
+    KEY             reduce using rule 14 (Valor -> List .)
+    [               reduce using rule 14 (Valor -> List .)
+    $end            reduce using rule 14 (Valor -> List .)
+    ,               reduce using rule 14 (Valor -> List .)
+    ]               reduce using rule 14 (Valor -> List .)
+
+
+state 19
+
+    (15) List -> [ . LCont
+    (16) LCont -> . ]
+    (17) LCont -> . Conteudo ]
+    (18) Conteudo -> . Valor Cont2
+    (8) Valor -> . STRING
+    (9) Valor -> . BOOLEAN
+    (10) Valor -> . IP
+    (11) Valor -> . NUM
+    (12) Valor -> . DATE
+    (13) Valor -> . TIME
+    (14) Valor -> . List
+    (15) List -> . [ LCont
+
+    ]               shift and go to state 22
+    STRING          shift and go to state 12
+    BOOLEAN         shift and go to state 13
+    IP              shift and go to state 14
+    NUM             shift and go to state 15
+    DATE            shift and go to state 16
+    TIME            shift and go to state 17
+    [               shift and go to state 19
+
+    LCont                          shift and go to state 21
+    Conteudo                       shift and go to state 23
+    Valor                          shift and go to state 24
+    List                           shift and go to state 18
+
+state 20
+
+    (7) Objeto -> [ OBJECT ] .
+
+    COMMENT         reduce using rule 7 (Objeto -> [ OBJECT ] .)
+    KEY             reduce using rule 7 (Objeto -> [ OBJECT ] .)
+    [               reduce using rule 7 (Objeto -> [ OBJECT ] .)
+    $end            reduce using rule 7 (Objeto -> [ OBJECT ] .)
+
+
+state 21
+
+    (15) List -> [ LCont .
+
+    COMMENT         reduce using rule 15 (List -> [ LCont .)
+    KEY             reduce using rule 15 (List -> [ LCont .)
+    [               reduce using rule 15 (List -> [ LCont .)
+    $end            reduce using rule 15 (List -> [ LCont .)
+    ,               reduce using rule 15 (List -> [ LCont .)
+    ]               reduce using rule 15 (List -> [ LCont .)
+
+
+state 22
+
+    (16) LCont -> ] .
+
+    COMMENT         reduce using rule 16 (LCont -> ] .)
+    KEY             reduce using rule 16 (LCont -> ] .)
+    [               reduce using rule 16 (LCont -> ] .)
+    $end            reduce using rule 16 (LCont -> ] .)
+    ,               reduce using rule 16 (LCont -> ] .)
+    ]               reduce using rule 16 (LCont -> ] .)
+
+
+state 23
+
+    (17) LCont -> Conteudo . ]
+
+    ]               shift and go to state 25
+
+
+state 24
+
+    (18) Conteudo -> Valor . Cont2
+    (19) Cont2 -> . , Conteudo
+    (20) Cont2 -> .
+
+    ,               shift and go to state 27
+    ]               reduce using rule 20 (Cont2 -> .)
+
+    Cont2                          shift and go to state 26
+
+state 25
+
+    (17) LCont -> Conteudo ] .
+
+    COMMENT         reduce using rule 17 (LCont -> Conteudo ] .)
+    KEY             reduce using rule 17 (LCont -> Conteudo ] .)
+    [               reduce using rule 17 (LCont -> Conteudo ] .)
+    $end            reduce using rule 17 (LCont -> Conteudo ] .)
+    ,               reduce using rule 17 (LCont -> Conteudo ] .)
+    ]               reduce using rule 17 (LCont -> Conteudo ] .)
+
+
+state 26
+
+    (18) Conteudo -> Valor Cont2 .
+
+    ]               reduce using rule 18 (Conteudo -> Valor Cont2 .)
+
+
+state 27
+
+    (19) Cont2 -> , . Conteudo
+    (18) Conteudo -> . Valor Cont2
+    (8) Valor -> . STRING
+    (9) Valor -> . BOOLEAN
+    (10) Valor -> . IP
+    (11) Valor -> . NUM
+    (12) Valor -> . DATE
+    (13) Valor -> . TIME
+    (14) Valor -> . List
+    (15) List -> . [ LCont
+
+    STRING          shift and go to state 12
+    BOOLEAN         shift and go to state 13
+    IP              shift and go to state 14
+    NUM             shift and go to state 15
+    DATE            shift and go to state 16
+    TIME            shift and go to state 17
+    [               shift and go to state 19
+
+    Conteudo                       shift and go to state 28
+    Valor                          shift and go to state 24
+    List                           shift and go to state 18
+
+state 28
+
+    (19) Cont2 -> , Conteudo .
+
+    ]               reduce using rule 19 (Cont2 -> , Conteudo .)
+
