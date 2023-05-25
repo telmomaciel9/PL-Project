@@ -1,5 +1,6 @@
 import sys
 import ply.lex as lex
+import toml
 
 
 tokens = (
@@ -40,42 +41,14 @@ def t_error(t):
 
 lexer = lex.lex()
 
-texto= '''
 
-title = "TOML Example"
+with open("exemplo1.toml",'r') as file:
+    texto = file.read()
 
-[owner]
-name = "Tom Preston-Werner"
-date = 2010-04-23
-time = 21:30:00
+    lexer.input(texto)
 
-[database]
-server = "192.168.1.1"
-ports = [ 8001, 8001, 8002 ]
-connection_max = 5000
-enabled = true
-
-[servers]
-[servers.alpha]
-ip = "10.0.0.1"
-dc = "eqdc10"
-
-[servers.beta]
-ip = "10.0.0.2"
-dc = "eqdc10"
-
-# Line breaks are OK when inside arrays
-hosts = [
-"alpha",
-"omega"
-]
-
-'''
-
-lexer.input(texto)
-
-while True:
-    tok = lexer.token()
-    if not tok:
-        break
-    print(tok)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        print(tok)
