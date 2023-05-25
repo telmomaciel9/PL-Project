@@ -1,7 +1,8 @@
 
 
-# T   : {}
-# NT  : {}
+# T   : {'=', '[', ']', ',', KEY, OBJECT, STRING, BOOLEAN, IP, 
+#        NUM, DATE, TIME, COMMENT}
+# NT  : {FT, Linha, Atributo, Objeto, Valor, List, LCont, Conteudo, Cont2}
 
 # P1  : FT : Linha FT 
 # P2  :    | Linha
