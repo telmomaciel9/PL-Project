@@ -1,0 +1,25 @@
+# Exemplo de arquivo TOML
+
+title = "Configurações do Sistema"
+author = "Jane Smith"
+
+[database]
+server = "db.example.com"
+port = 3306
+username = "admin"
+password = "mysecretpassword"
+
+[server]
+ip = "10.0.0.1"
+port = 8080
+ssl_enabled = false
+
+[logging]
+enabled = true
+level = "debug"
+file = "/var/log/application.log"
+
+[features]
+feature1 = true
+feature2 = false
+feature3 = true

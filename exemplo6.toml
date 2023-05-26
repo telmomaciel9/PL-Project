@@ -1,0 +1,44 @@
+# Configurações gerais
+title = "Configurações do Sistema"
+version = "2.0"
+
+# Opções de conexão
+[connection]
+  host = "localhost"
+  port = 8080
+  timeout = 60
+
+# Configurações do banco de dados
+[database]
+  driver = "mysql"
+  host = "db.example.com"
+  port = 3306
+  username = "admin"
+  password = "password123"
+
+# Configurações de e-mail
+[email]
+  sender = "info@example.com"
+  smtp_server = "smtp.example.com"
+  smtp_port = 587
+  username = "emailuser"
+  password = "emailpass"
+
+# Lista de usuários
+[user1]
+  name = "John Doe"
+  username = "johndoe"
+  email = "johndoe@example.com"
+  roles = ["admin", "editor"]
+
+[user2]
+  name = "Jane Smith"
+  username = "janesmith"
+  email = "janesmith@example.com"
+  roles = ["editor"]
+
+# Configurações avançadas
+[advanced]
+  debug_mode = false
+  logging_level = "info"
+  max_connections = 1000

@@ -53,7 +53,8 @@ def t_NUMBER(t):
 
 def t_COMMENT(t):
     r'(\#\s.*)'
-    return t
+    pass
+    #return t
 
 def t_STRING(t): 
     r'("[^"]*" | \'[^\']*\' | """[^"]*""" | \'\'\'[^\']*\'\'\')'
@@ -64,17 +65,19 @@ def t_STRING(t):
 #    r'[a-zA-Z_][a-zA-Z0-9_]*'
 #    return t
 
-def t_KEY(t): r'[a-z]+\D?[a-z]+\s'; return t
+def t_KEY(t): 
+    r'([a-z_\d]+)\s'
+    return t
 
 def t_SUBOBJECT(t): 
-    r'[a-z]*\.[a-z]+'
-    match = re.match(r'([a-z]*)\.([a-z]+)', t.value)
+    r'[a-zA-Z_\d]*\.[a-zA-Z_\d]+'
+    match = re.match(r'([a-zA-Z_\d]*)\.([a-zA-Z_\d]+)', t.value)
     if match:
         t.value = match.group(2)
     return t
 
 def t_OBJECT(t): 
-    r'[a-z]+'
+    r'[a-zA-Z_\d]+'
     return t
 
 t_LBRACKET = r'\['
@@ -90,7 +93,7 @@ def t_error(t):
 lexer = lex.lex()
 
 
-with open("exemplo2.toml",'r') as file:
+with open("exemplo1.toml",'r') as file:
     texto = file.read()
 
     lexer.input(texto)

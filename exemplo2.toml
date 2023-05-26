@@ -1,24 +1,20 @@
-title = "TOML Example"
+# Exemplo de arquivo TOML
 
-[owner]
-name = "Tom Preston-Werner"
-date = 2010-04-23
-time = 21:30:00
+title = "Configurações do Sistema"
+author = "John Doe"
 
 [database]
-server = "192.168.1.1"
-ports = [ 8001, 8001, 8002 ]
-connection_max = 5000
+server = "localhost"
+port = 5432
+username = "admin"
+password = "secretpassword"
+
+[server]
+ip = "192.168.0.1"
+port = 8080
+ssl_enabled = true
+
+[logs]
 enabled = true
-
-[servers]
-[servers.alpha]
-ip = "10.0.0.1"
-dc = "eqdc10"
-
-
-
-hosts = [
-"alpha",
-"omega"
-]
+path = "/var/log/application.log"
+level = "info"

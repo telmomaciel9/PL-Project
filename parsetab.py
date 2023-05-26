@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BOOLEAN COMMA COMMENT DATE EQUALS IP KEY LBRACKET NUMBER OBJECT RBRACKET STRING SUBOBJECT TIMEFT : Section_listSection_list : Section Section_listSection_list : SectionSection  : LBRACKET Section_name RBRACKET Section_contentSection  : LBRACKET Section_name RBRACKET SubsectionSection  : ContentSubsection : LBRACKET Subsection_name RBRACKET Section_content Section_name : OBJECTSubsection_name : SUBOBJECTSection_content : Content Section_contentSection_content : ContentSection_content : COMMENTContent : Key EQUALS ValueKey : KEYValue : STRING\n             | NUMBER\n             | IP\n             | DATE\n             | TIME\n             | BOOLEAN\n             | Array\n            Array : LBRACKET Value_list RBRACKET Value_list : Value COMMA Value_list\n                  | Value'
+_lr_signature = 'BOOLEAN COMMA COMMENT DATE EQUALS IP KEY LBRACKET NUMBER OBJECT RBRACKET STRING SUBOBJECT TIMEFT : Section_listSection_list : Section Section_listSection_list : SectionSection  : LBRACKET Section_name RBRACKET Section_contentSection  : LBRACKET Section_name RBRACKET SubsectionSection  : ContentSubsection : LBRACKET Subsection_name RBRACKET Section_content SubsectionSubsection : LBRACKET Subsection_name RBRACKET Section_contentSection_name : OBJECTSubsection_name : SUBOBJECTSection_content : Content Section_contentSection_content : ContentSection_content : COMMENTContent : Key EQUALS ValueKey : KEYValue : STRING\n             | NUMBER\n             | IP\n             | DATE\n             | TIME\n             | BOOLEAN\n             | Array\n            Array : LBRACKET Value_list RBRACKET Value_list : Value COMMA Value_list\n                  | Value'
     
-_lr_action_items = {'LBRACKET':([0,3,5,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,31,32,33,36,],[4,4,-6,21,22,-13,-15,-16,-17,-18,-19,-20,-21,21,-4,-5,-11,-12,-10,-22,21,-7,]),'KEY':([0,3,5,12,13,14,15,16,17,18,19,20,23,24,25,26,31,32,34,36,],[7,7,-6,7,-13,-15,-16,-17,-18,-19,-20,-21,-4,-5,7,-12,-10,-22,7,-7,]),'$end':([1,2,3,5,8,13,14,15,16,17,18,19,20,23,24,25,26,31,32,36,],[0,-1,-3,-6,-2,-13,-15,-16,-17,-18,-19,-20,-21,-4,-5,-11,-12,-10,-22,-7,]),'OBJECT':([4,],[10,]),'EQUALS':([6,7,],[11,-14,]),'RBRACKET':([9,10,14,15,16,17,18,19,20,27,28,29,30,32,35,],[12,-8,-15,-16,-17,-18,-19,-20,-21,32,-24,34,-9,-22,-23,]),'STRING':([11,21,33,],[14,14,14,]),'NUMBER':([11,21,33,],[15,15,15,]),'IP':([11,21,33,],[16,16,16,]),'DATE':([11,21,33,],[17,17,17,]),'TIME':([11,21,33,],[18,18,18,]),'BOOLEAN':([11,21,33,],[19,19,19,]),'COMMENT':([12,13,14,15,16,17,18,19,20,25,32,34,],[26,-13,-15,-16,-17,-18,-19,-20,-21,26,-22,26,]),'COMMA':([14,15,16,17,18,19,20,28,32,],[-15,-16,-17,-18,-19,-20,-21,33,-22,]),'SUBOBJECT':([22,],[30,]),}
+_lr_action_items = {'LBRACKET':([0,3,5,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,31,32,33,36,37,],[4,4,-6,21,22,-14,-16,-17,-18,-19,-20,-21,-22,21,-4,-5,-12,-13,-11,-23,21,22,-7,]),'KEY':([0,3,5,12,13,14,15,16,17,18,19,20,23,24,25,26,31,32,34,36,37,],[7,7,-6,7,-14,-16,-17,-18,-19,-20,-21,-22,-4,-5,7,-13,-11,-23,7,-8,-7,]),'$end':([1,2,3,5,8,13,14,15,16,17,18,19,20,23,24,25,26,31,32,36,37,],[0,-1,-3,-6,-2,-14,-16,-17,-18,-19,-20,-21,-22,-4,-5,-12,-13,-11,-23,-8,-7,]),'OBJECT':([4,],[10,]),'EQUALS':([6,7,],[11,-15,]),'RBRACKET':([9,10,14,15,16,17,18,19,20,27,28,29,30,32,35,],[12,-9,-16,-17,-18,-19,-20,-21,-22,32,-25,34,-10,-23,-24,]),'STRING':([11,21,33,],[14,14,14,]),'NUMBER':([11,21,33,],[15,15,15,]),'IP':([11,21,33,],[16,16,16,]),'DATE':([11,21,33,],[17,17,17,]),'TIME':([11,21,33,],[18,18,18,]),'BOOLEAN':([11,21,33,],[19,19,19,]),'COMMENT':([12,13,14,15,16,17,18,19,20,25,32,34,],[26,-14,-16,-17,-18,-19,-20,-21,-22,26,-23,26,]),'COMMA':([14,15,16,17,18,19,20,28,32,],[-16,-17,-18,-19,-20,-21,-22,33,-23,]),'SUBOBJECT':([22,],[30,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'FT':([0,],[1,]),'Section_list':([0,3,],[2,8,]),'Section':([0,3,],[3,3,]),'Content':([0,3,12,25,34,],[5,5,25,25,25,]),'Key':([0,3,12,25,34,],[6,6,6,6,6,]),'Section_name':([4,],[9,]),'Value':([11,21,33,],[13,28,28,]),'Array':([11,21,33,],[20,20,20,]),'Section_content':([12,25,34,],[23,31,36,]),'Subsection':([12,],[24,]),'Value_list':([21,33,],[27,35,]),'Subsection_name':([22,],[29,]),}
+_lr_goto_items = {'FT':([0,],[1,]),'Section_list':([0,3,],[2,8,]),'Section':([0,3,],[3,3,]),'Content':([0,3,12,25,34,],[5,5,25,25,25,]),'Key':([0,3,12,25,34,],[6,6,6,6,6,]),'Section_name':([4,],[9,]),'Value':([11,21,33,],[13,28,28,]),'Array':([11,21,33,],[20,20,20,]),'Section_content':([12,25,34,],[23,31,36,]),'Subsection':([12,36,],[24,37,]),'Value_list':([21,33,],[27,35,]),'Subsection_name':([22,],[29,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,28 +27,29 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> FT","S'",1,None,None,None),
-  ('FT -> Section_list','FT',1,'p_FT','yacc.py',34),
-  ('Section_list -> Section Section_list','Section_list',2,'p_Section_list1','yacc.py',38),
-  ('Section_list -> Section','Section_list',1,'p_Section_list2','yacc.py',42),
-  ('Section -> LBRACKET Section_name RBRACKET Section_content','Section',4,'p_Section1','yacc.py',46),
-  ('Section -> LBRACKET Section_name RBRACKET Subsection','Section',4,'p_Section2','yacc.py',50),
-  ('Section -> Content','Section',1,'p_Section3','yacc.py',54),
-  ('Subsection -> LBRACKET Subsection_name RBRACKET Section_content','Subsection',4,'p_Subsection','yacc.py',58),
-  ('Section_name -> OBJECT','Section_name',1,'p_Section_name','yacc.py',62),
-  ('Subsection_name -> SUBOBJECT','Subsection_name',1,'p_Subsection_name','yacc.py',66),
-  ('Section_content -> Content Section_content','Section_content',2,'p_Section_content1','yacc.py',70),
-  ('Section_content -> Content','Section_content',1,'p_Section_content2','yacc.py',76),
-  ('Section_content -> COMMENT','Section_content',1,'p_Section_content3','yacc.py',81),
-  ('Content -> Key EQUALS Value','Content',3,'p_Content','yacc.py',85),
-  ('Key -> KEY','Key',1,'p_Key','yacc.py',91),
-  ('Value -> STRING','Value',1,'p_Value','yacc.py',96),
-  ('Value -> NUMBER','Value',1,'p_Value','yacc.py',97),
-  ('Value -> IP','Value',1,'p_Value','yacc.py',98),
-  ('Value -> DATE','Value',1,'p_Value','yacc.py',99),
-  ('Value -> TIME','Value',1,'p_Value','yacc.py',100),
-  ('Value -> BOOLEAN','Value',1,'p_Value','yacc.py',101),
-  ('Value -> Array','Value',1,'p_Value','yacc.py',102),
-  ('Array -> LBRACKET Value_list RBRACKET','Array',3,'p_Array','yacc.py',108),
-  ('Value_list -> Value COMMA Value_list','Value_list',3,'p_Value_list','yacc.py',112),
-  ('Value_list -> Value','Value_list',1,'p_Value_list','yacc.py',113),
+  ('FT -> Section_list','FT',1,'p_FT','yacc.py',35),
+  ('Section_list -> Section Section_list','Section_list',2,'p_Section_list1','yacc.py',39),
+  ('Section_list -> Section','Section_list',1,'p_Section_list2','yacc.py',43),
+  ('Section -> LBRACKET Section_name RBRACKET Section_content','Section',4,'p_Section1','yacc.py',47),
+  ('Section -> LBRACKET Section_name RBRACKET Subsection','Section',4,'p_Section2','yacc.py',51),
+  ('Section -> Content','Section',1,'p_Section3','yacc.py',55),
+  ('Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection','Subsection',5,'p_Subsection1','yacc.py',59),
+  ('Subsection -> LBRACKET Subsection_name RBRACKET Section_content','Subsection',4,'p_Subsection2','yacc.py',63),
+  ('Section_name -> OBJECT','Section_name',1,'p_Section_name','yacc.py',67),
+  ('Subsection_name -> SUBOBJECT','Subsection_name',1,'p_Subsection_name','yacc.py',71),
+  ('Section_content -> Content Section_content','Section_content',2,'p_Section_content1','yacc.py',75),
+  ('Section_content -> Content','Section_content',1,'p_Section_content2','yacc.py',81),
+  ('Section_content -> COMMENT','Section_content',1,'p_Section_content3','yacc.py',86),
+  ('Content -> Key EQUALS Value','Content',3,'p_Content','yacc.py',90),
+  ('Key -> KEY','Key',1,'p_Key','yacc.py',96),
+  ('Value -> STRING','Value',1,'p_Value','yacc.py',101),
+  ('Value -> NUMBER','Value',1,'p_Value','yacc.py',102),
+  ('Value -> IP','Value',1,'p_Value','yacc.py',103),
+  ('Value -> DATE','Value',1,'p_Value','yacc.py',104),
+  ('Value -> TIME','Value',1,'p_Value','yacc.py',105),
+  ('Value -> BOOLEAN','Value',1,'p_Value','yacc.py',106),
+  ('Value -> Array','Value',1,'p_Value','yacc.py',107),
+  ('Array -> LBRACKET Value_list RBRACKET','Array',3,'p_Array','yacc.py',113),
+  ('Value_list -> Value COMMA Value_list','Value_list',3,'p_Value_list','yacc.py',117),
+  ('Value_list -> Value','Value_list',1,'p_Value_list','yacc.py',118),
 ]

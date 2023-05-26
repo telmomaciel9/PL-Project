@@ -10,25 +10,26 @@ import ply.yacc as yacc
 # P3  : Section_list : Section
 # P4  : Section : '[' Section_name ']' Section_content 
 # P5  :         | '[' Section_name ']' Subsection
-# P   :         | Content
-#     : Subsection : '[' Subsection_name ']' Section_content
-# P6  : Section_name : OBJECT
-# P6  : Subsection_name : SUBOBJECT
-# P7  : Section_content : Content Section_content
-# P8  :                 | Content
-# P9  :                 | COMMENT
-# P10 : Content : Key '=' Value
-# P11 : Key : KEY
-# P12 : Value : STRING
-# P13 :       | NUMBER
-# P14 :       | IP
-# P15 :       | DATE
-# P16 :       | TIME
-# P17 :       | BOOLEAN
-# P18 :       | Array
-# P19 : Array : '[' Value_list ']'
-# P20 : Value_list : Value ',' Value_list
-# P21 :            | Value
+# P6  :         | Content
+# P7  : Subsection : '[' Subsection_name ']' Section_content Subsection
+# P8  : Subsection : '[' Subsection_name ']' Section_content 
+# P9  : Section_name : OBJECT
+# P10 : Subsection_name : SUBOBJECT
+# P11 : Section_content : Content Section_content
+# P12 :                 | Content
+# P13 :                 | COMMENT
+# P14 : Content : Key '=' Value
+# P15 : Key : KEY
+# P16 : Value : STRING
+# P17 :       | NUMBER
+# P18 :       | IP
+# P19 :       | DATE
+# P20 :       | TIME
+# P21 :       | BOOLEAN
+# P22 :       | Array
+# P23 : Array : '[' Value_list ']'
+# P24 : Value_list : Value ',' Value_list
+# P25 :            | Value
 
 def p_FT(p):
     "FT : Section_list"
@@ -54,9 +55,14 @@ def p_Section3(p):
     "Section  : Content"
     p[0] = p[1]
 
-def p_Subsection(p):
-    "Subsection : LBRACKET Subsection_name RBRACKET Section_content "
-    p[0] = { p[2]: p[4] } 
+def p_Subsection1(p):
+    "Subsection : LBRACKET Subsection_name RBRACKET Section_content Subsection"
+    p[0] = {p[2]: p[4]}
+    p[0].update(p[5])
+
+def p_Subsection2(p):
+    "Subsection : LBRACKET Subsection_name RBRACKET Section_content"
+    p[0] = { p[2]: p[4] }  
 
 def p_Section_name(p):
     "Section_name : OBJECT"
@@ -69,13 +75,10 @@ def p_Subsection_name(p):
 def p_Section_content1(p):
     "Section_content : Content Section_content"
     p[0] = {**p[1], **p[2]}
-    #print(p[0])
-
 
 def p_Section_content2(p):
     "Section_content : Content"
     p[0] = p[1]
-    #print(p[1])
 
 def p_Section_content3(p):
     "Section_content : COMMENT"
@@ -84,13 +87,10 @@ def p_Section_content3(p):
 def p_Content(p):
     "Content : Key EQUALS Value"
     p[0] = { p[1] : p[3] }
-    #print("KEY: ", p[1], ", VALUE: " , p[3])
-    #print(p[0])
 
 def p_Key(p):
     "Key : KEY"
     p[0] = p[1]
-    #print("KEY: ", p[0])
 
 def p_Value(p):
     '''Value : STRING
@@ -102,7 +102,6 @@ def p_Value(p):
              | Array
             '''
     p[0] = p[1]
-    #print("Value: ", p[0])
 
 def p_Array(p):
     "Array : LBRACKET Value_list RBRACKET "
