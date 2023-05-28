@@ -26,18 +26,18 @@ import ply.yacc as yacc
 # P16 : Content         : Key '=' Value
 # P17 : Key             : KEY
 # P18 : Value           : BASIC_STRING
-#                       | LITERAL_STRING
-#                       | STRING
-# P19 :                 | NUMBER
-# P20 :                 | IP
-# P21 :                 | DATE
-# P22 :                 | TIME
-# P23 :                 | DATE_TIME
-# P23 :                 | BOOLEAN
-# P24 :                 | Array
-# P25 : Array           : '[' Value_list ']'
-# P26 : Value_list      : Value ',' Value_list
-# P27 :                 | Value
+# P19 :                 | LITERAL_STRING
+# P20 :                 | STRING
+# P21 :                 | NUMBER
+# P22 :                 | IP
+# P23 :                 | DATE
+# P24 :                 | TIME
+# P25 :                 | DATE_TIME
+# P26 :                 | BOOLEAN
+# P27 :                 | Array
+# P28 : Array           : '[' Value_list ']'
+# P29 : Value_list      : Value ',' Value_list
+# P30 :                 | Value
 
 def p_FT(p):
     "FT : Section_list"
@@ -118,7 +118,9 @@ def p_Key(p):
     p[0] = p[1]
 
 def p_Value(p):
-    '''Value : STRING
+    '''Value : BASIC_STRING
+             | LITERAL_STRING
+             | STRING
              | NUMBER
              | IP
              | DATE

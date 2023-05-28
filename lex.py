@@ -23,7 +23,6 @@ tokens = (
     'RBRACKET',
     'EQUALS',
     'COMMA',
-
 )
 
 literals = '-:.",=[]'
@@ -122,4 +121,4 @@ while True:
     tok = lexer.token()
     if not tok:
         break
-    print(tok)    
+    #print(tok)    
