@@ -1,35 +1,40 @@
 import sys
 import json
 import toml
-from lex import tokens, texto
+import yaml
+import os
+import xml.etree.ElementTree as ET
+from lex import tokens, texto, linguagem
 import ply.yacc as yacc
 
 
-# P1  : FT : Section_list 
-# P2  : Section_list : Section section_list
-# P3  : Section_list : Section
-# P4  : Section : '[' Section_name ']' Section_content 
-# P5  :         | '[' Section_name ']' Subsection
-# P6  :         | Content
-# P7  : Subsection : '[' Subsection_name ']' Section_content Subsection
-# P8  : Subsection : '[' Subsection_name ']' Section_content 
-# P9  : Section_name : OBJECT
-# P10 : Subsection_name : SUBOBJECT
-# P11 : Section_content : Content Section_content
-# P12 :                 | Content
-# P13 :                 | COMMENT
-# P14 : Content : Key '=' Value
-# P15 : Key : KEY
-# P16 : Value : STRING
-# P17 :       | NUMBER
-# P18 :       | IP
-# P19 :       | DATE
-# P20 :       | TIME
-# P21 :       | BOOLEAN
-# P22 :       | Array
-# P23 : Array : '[' Value_list ']'
-# P24 : Value_list : Value ',' Value_list
-# P25 :            | Value
+# P1  : FT              : Section_list 
+# P2  : Section_list    : Section section_list
+# P3  :                 | Section
+# P4  : Section         : '[' Section_name ']' Section_content 
+# P5  :                 | '[' Section_name ']' Subsection
+# P6  :                 | Content
+# P7  : Table           : LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table
+# P8  :                 | LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content
+# P9  : Subsection      : '[' Subsection_name ']' Section_content Subsection
+# P10 :                 | '[' Subsection_name ']' Section_content 
+# P11 : Section_name    : OBJECT
+# P12 : Subsection_name : SUBOBJECT
+# P13 : Section_content : Content Section_content
+# P14 :                 | Content
+# P15 :                 | COMMENT
+# P16 : Content         : Key '=' Value
+# P17 : Key             : KEY
+# P18 : Value           : STRING
+# P19 :                 | NUMBER
+# P20 :                 | IP
+# P21 :                 | DATE
+# P22 :                 | TIME
+# P23 :                 | BOOLEAN
+# P24 :                 | Array
+# P25 : Array           : '[' Value_list ']'
+# P26 : Value_list      : Value ',' Value_list
+# P27 :                 | Value
 
 def p_FT(p):
     "FT : Section_list"
@@ -54,6 +59,23 @@ def p_Section2(p):
 def p_Section3(p):
     "Section  : Content"
     p[0] = p[1]
+
+def p_Section4(p):
+    "Section  : Table"
+    p[0] = p[1]
+
+def p_Table1(p):
+    "Table : LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table"
+    keys_list = list(p[7].keys())
+    if p[3] == keys_list[0]:
+        p[0] = {p[3]: [p[6]]+p[7][p[3]]}
+    else:
+        p[0] = {p[3]: [p[6]]}
+        p[0].update(p[7])
+
+def p_Table2(p):
+    "Table : LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content"
+    p[0] = { p[3]: [p[6]] }
 
 def p_Subsection1(p):
     "Subsection : LBRACKET Subsection_name RBRACKET Section_content Subsection"
@@ -123,17 +145,5 @@ def p_error(p):
 parser = yacc.yacc()
 parser.success = True
 
-
-# Função para transformar o dicionário TOML em uma string JSON
-def to_json(toml_dict):
-   return json.dumps(toml_dict, indent=2)
-
-
-#parser.parse(texto)
 parsed_dict = parser.parse(texto)
-print(parsed_dict)
-json_string = to_json(parsed_dict)
-print(json_string)
-
-with open("out.json", "w") as f:
-    json.dump(parsed_dict, f, ensure_ascii=False)
+parser.parse(texto)

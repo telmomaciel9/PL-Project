@@ -1,0 +1,28 @@
+title = "Configurações do Sistema"
+
+[database]
+  server = "localhost"
+  port = 5432
+  connection_max = 1000
+  enabled = true
+
+[logging]
+  file = "app.log"
+  level = "info"
+  rotation = true
+
+[server]
+  ip = "127.0.0.1"
+  port = 8080
+  timeout = 120
+  max_connections = 100
+
+[[users]]
+  name = "Alice"
+  age = 28
+  email = "alice@example.com"
+
+[[users]]
+  name = "Bob"
+  age = 32
+  email = "bob@example.com"

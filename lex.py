@@ -2,6 +2,7 @@ import sys
 import ply.lex as lex
 import toml
 import re
+from menu import path, linguagem
 
 tokens = (
     'STRING',
@@ -92,14 +93,13 @@ def t_error(t):
 
 lexer = lex.lex()
 
-
-with open("exemplo1.toml",'r') as file:
+with open(path,'r') as file:
     texto = file.read()
 
-    lexer.input(texto)
+lexer.input(texto)
 
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        #print(tok)
+while True:
+    tok = lexer.token()
+    if not tok:
+        break
+    #print(tok)    

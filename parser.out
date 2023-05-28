@@ -9,58 +9,62 @@ Rule 3     Section_list -> Section
 Rule 4     Section -> LBRACKET Section_name RBRACKET Section_content
 Rule 5     Section -> LBRACKET Section_name RBRACKET Subsection
 Rule 6     Section -> Content
-Rule 7     Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection
-Rule 8     Subsection -> LBRACKET Subsection_name RBRACKET Section_content
-Rule 9     Section_name -> OBJECT
-Rule 10    Subsection_name -> SUBOBJECT
-Rule 11    Section_content -> Content Section_content
-Rule 12    Section_content -> Content
-Rule 13    Section_content -> COMMENT
-Rule 14    Content -> Key EQUALS Value
-Rule 15    Key -> KEY
-Rule 16    Value -> STRING
-Rule 17    Value -> NUMBER
-Rule 18    Value -> IP
-Rule 19    Value -> DATE
-Rule 20    Value -> TIME
-Rule 21    Value -> BOOLEAN
-Rule 22    Value -> Array
-Rule 23    Array -> LBRACKET Value_list RBRACKET
-Rule 24    Value_list -> Value COMMA Value_list
-Rule 25    Value_list -> Value
+Rule 7     Section -> Table
+Rule 8     Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table
+Rule 9     Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content
+Rule 10    Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection
+Rule 11    Subsection -> LBRACKET Subsection_name RBRACKET Section_content
+Rule 12    Section_name -> OBJECT
+Rule 13    Subsection_name -> SUBOBJECT
+Rule 14    Section_content -> Content Section_content
+Rule 15    Section_content -> Content
+Rule 16    Section_content -> COMMENT
+Rule 17    Content -> Key EQUALS Value
+Rule 18    Key -> KEY
+Rule 19    Value -> STRING
+Rule 20    Value -> NUMBER
+Rule 21    Value -> IP
+Rule 22    Value -> DATE
+Rule 23    Value -> TIME
+Rule 24    Value -> BOOLEAN
+Rule 25    Value -> Array
+Rule 26    Array -> LBRACKET Value_list RBRACKET
+Rule 27    Value_list -> Value COMMA Value_list
+Rule 28    Value_list -> Value
 
 Terminals, with rules where they appear
 
-BOOLEAN              : 21
-COMMA                : 24
-COMMENT              : 13
-DATE                 : 19
-EQUALS               : 14
-IP                   : 18
-KEY                  : 15
-LBRACKET             : 4 5 7 8 23
-NUMBER               : 17
-OBJECT               : 9
-RBRACKET             : 4 5 7 8 23
-STRING               : 16
-SUBOBJECT            : 10
-TIME                 : 20
+BOOLEAN              : 24
+COMMA                : 27
+COMMENT              : 16
+DATE                 : 22
+EQUALS               : 17
+IP                   : 21
+KEY                  : 18
+LBRACKET             : 4 5 8 8 9 9 10 11 26
+NUMBER               : 20
+OBJECT               : 12
+RBRACKET             : 4 5 8 8 9 9 10 11 26
+STRING               : 19
+SUBOBJECT            : 13
+TIME                 : 23
 error                : 
 
 Nonterminals, with rules where they appear
 
-Array                : 22
-Content              : 6 11 12
+Array                : 25
+Content              : 6 14 15
 FT                   : 0
-Key                  : 14
+Key                  : 17
 Section              : 2 3
-Section_content      : 4 7 8 11
+Section_content      : 4 8 9 10 11 14
 Section_list         : 1 2
-Section_name         : 4 5
-Subsection           : 5 7
-Subsection_name      : 7 8
-Value                : 14 24 25
-Value_list           : 23 24
+Section_name         : 4 5 8 9
+Subsection           : 5 10
+Subsection_name      : 10 11
+Table                : 7 8
+Value                : 17 27 28
+Value_list           : 26 27
 
 Parsing method: LALR
 
@@ -73,17 +77,21 @@ state 0
     (4) Section -> . LBRACKET Section_name RBRACKET Section_content
     (5) Section -> . LBRACKET Section_name RBRACKET Subsection
     (6) Section -> . Content
-    (14) Content -> . Key EQUALS Value
-    (15) Key -> . KEY
+    (7) Section -> . Table
+    (17) Content -> . Key EQUALS Value
+    (8) Table -> . LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table
+    (9) Table -> . LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content
+    (18) Key -> . KEY
 
     LBRACKET        shift and go to state 4
-    KEY             shift and go to state 7
+    KEY             shift and go to state 8
 
     FT                             shift and go to state 1
     Section_list                   shift and go to state 2
     Section                        shift and go to state 3
     Content                        shift and go to state 5
-    Key                            shift and go to state 6
+    Table                          shift and go to state 6
+    Key                            shift and go to state 7
 
 state 1
 
@@ -107,27 +115,34 @@ state 3
     (4) Section -> . LBRACKET Section_name RBRACKET Section_content
     (5) Section -> . LBRACKET Section_name RBRACKET Subsection
     (6) Section -> . Content
-    (14) Content -> . Key EQUALS Value
-    (15) Key -> . KEY
+    (7) Section -> . Table
+    (17) Content -> . Key EQUALS Value
+    (8) Table -> . LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table
+    (9) Table -> . LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content
+    (18) Key -> . KEY
 
     $end            reduce using rule 3 (Section_list -> Section .)
     LBRACKET        shift and go to state 4
-    KEY             shift and go to state 7
+    KEY             shift and go to state 8
 
     Section                        shift and go to state 3
-    Section_list                   shift and go to state 8
+    Section_list                   shift and go to state 9
     Content                        shift and go to state 5
-    Key                            shift and go to state 6
+    Table                          shift and go to state 6
+    Key                            shift and go to state 7
 
 state 4
 
     (4) Section -> LBRACKET . Section_name RBRACKET Section_content
     (5) Section -> LBRACKET . Section_name RBRACKET Subsection
-    (9) Section_name -> . OBJECT
+    (8) Table -> LBRACKET . LBRACKET Section_name RBRACKET RBRACKET Section_content Table
+    (9) Table -> LBRACKET . LBRACKET Section_name RBRACKET RBRACKET Section_content
+    (12) Section_name -> . OBJECT
 
-    OBJECT          shift and go to state 10
+    LBRACKET        shift and go to state 10
+    OBJECT          shift and go to state 12
 
-    Section_name                   shift and go to state 9
+    Section_name                   shift and go to state 11
 
 state 5
 
@@ -140,215 +155,250 @@ state 5
 
 state 6
 
-    (14) Content -> Key . EQUALS Value
+    (7) Section -> Table .
 
-    EQUALS          shift and go to state 11
+    LBRACKET        reduce using rule 7 (Section -> Table .)
+    KEY             reduce using rule 7 (Section -> Table .)
+    $end            reduce using rule 7 (Section -> Table .)
 
 
 state 7
 
-    (15) Key -> KEY .
+    (17) Content -> Key . EQUALS Value
 
-    EQUALS          reduce using rule 15 (Key -> KEY .)
+    EQUALS          shift and go to state 13
 
 
 state 8
+
+    (18) Key -> KEY .
+
+    EQUALS          reduce using rule 18 (Key -> KEY .)
+
+
+state 9
 
     (2) Section_list -> Section Section_list .
 
     $end            reduce using rule 2 (Section_list -> Section Section_list .)
 
 
-state 9
+state 10
+
+    (8) Table -> LBRACKET LBRACKET . Section_name RBRACKET RBRACKET Section_content Table
+    (9) Table -> LBRACKET LBRACKET . Section_name RBRACKET RBRACKET Section_content
+    (12) Section_name -> . OBJECT
+
+    OBJECT          shift and go to state 12
+
+    Section_name                   shift and go to state 14
+
+state 11
 
     (4) Section -> LBRACKET Section_name . RBRACKET Section_content
     (5) Section -> LBRACKET Section_name . RBRACKET Subsection
 
-    RBRACKET        shift and go to state 12
+    RBRACKET        shift and go to state 15
 
-
-state 10
-
-    (9) Section_name -> OBJECT .
-
-    RBRACKET        reduce using rule 9 (Section_name -> OBJECT .)
-
-
-state 11
-
-    (14) Content -> Key EQUALS . Value
-    (16) Value -> . STRING
-    (17) Value -> . NUMBER
-    (18) Value -> . IP
-    (19) Value -> . DATE
-    (20) Value -> . TIME
-    (21) Value -> . BOOLEAN
-    (22) Value -> . Array
-    (23) Array -> . LBRACKET Value_list RBRACKET
-
-    STRING          shift and go to state 14
-    NUMBER          shift and go to state 15
-    IP              shift and go to state 16
-    DATE            shift and go to state 17
-    TIME            shift and go to state 18
-    BOOLEAN         shift and go to state 19
-    LBRACKET        shift and go to state 21
-
-    Value                          shift and go to state 13
-    Array                          shift and go to state 20
 
 state 12
 
-    (4) Section -> LBRACKET Section_name RBRACKET . Section_content
-    (5) Section -> LBRACKET Section_name RBRACKET . Subsection
-    (11) Section_content -> . Content Section_content
-    (12) Section_content -> . Content
-    (13) Section_content -> . COMMENT
-    (7) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content Subsection
-    (8) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content
-    (14) Content -> . Key EQUALS Value
-    (15) Key -> . KEY
+    (12) Section_name -> OBJECT .
 
-    COMMENT         shift and go to state 26
-    LBRACKET        shift and go to state 22
-    KEY             shift and go to state 7
+    RBRACKET        reduce using rule 12 (Section_name -> OBJECT .)
 
-    Section_content                shift and go to state 23
-    Subsection                     shift and go to state 24
-    Content                        shift and go to state 25
-    Key                            shift and go to state 6
 
 state 13
 
-    (14) Content -> Key EQUALS Value .
+    (17) Content -> Key EQUALS . Value
+    (19) Value -> . STRING
+    (20) Value -> . NUMBER
+    (21) Value -> . IP
+    (22) Value -> . DATE
+    (23) Value -> . TIME
+    (24) Value -> . BOOLEAN
+    (25) Value -> . Array
+    (26) Array -> . LBRACKET Value_list RBRACKET
 
-    LBRACKET        reduce using rule 14 (Content -> Key EQUALS Value .)
-    KEY             reduce using rule 14 (Content -> Key EQUALS Value .)
-    $end            reduce using rule 14 (Content -> Key EQUALS Value .)
-    COMMENT         reduce using rule 14 (Content -> Key EQUALS Value .)
+    STRING          shift and go to state 17
+    NUMBER          shift and go to state 18
+    IP              shift and go to state 19
+    DATE            shift and go to state 20
+    TIME            shift and go to state 21
+    BOOLEAN         shift and go to state 22
+    LBRACKET        shift and go to state 24
 
+    Value                          shift and go to state 16
+    Array                          shift and go to state 23
 
 state 14
 
-    (16) Value -> STRING .
+    (8) Table -> LBRACKET LBRACKET Section_name . RBRACKET RBRACKET Section_content Table
+    (9) Table -> LBRACKET LBRACKET Section_name . RBRACKET RBRACKET Section_content
 
-    LBRACKET        reduce using rule 16 (Value -> STRING .)
-    KEY             reduce using rule 16 (Value -> STRING .)
-    $end            reduce using rule 16 (Value -> STRING .)
-    COMMENT         reduce using rule 16 (Value -> STRING .)
-    COMMA           reduce using rule 16 (Value -> STRING .)
-    RBRACKET        reduce using rule 16 (Value -> STRING .)
+    RBRACKET        shift and go to state 25
 
 
 state 15
 
-    (17) Value -> NUMBER .
+    (4) Section -> LBRACKET Section_name RBRACKET . Section_content
+    (5) Section -> LBRACKET Section_name RBRACKET . Subsection
+    (14) Section_content -> . Content Section_content
+    (15) Section_content -> . Content
+    (16) Section_content -> . COMMENT
+    (10) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content Subsection
+    (11) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content
+    (17) Content -> . Key EQUALS Value
+    (18) Key -> . KEY
 
-    LBRACKET        reduce using rule 17 (Value -> NUMBER .)
-    KEY             reduce using rule 17 (Value -> NUMBER .)
-    $end            reduce using rule 17 (Value -> NUMBER .)
-    COMMENT         reduce using rule 17 (Value -> NUMBER .)
-    COMMA           reduce using rule 17 (Value -> NUMBER .)
-    RBRACKET        reduce using rule 17 (Value -> NUMBER .)
+    COMMENT         shift and go to state 30
+    LBRACKET        shift and go to state 26
+    KEY             shift and go to state 8
 
+    Section_content                shift and go to state 27
+    Subsection                     shift and go to state 28
+    Content                        shift and go to state 29
+    Key                            shift and go to state 7
 
 state 16
 
-    (18) Value -> IP .
+    (17) Content -> Key EQUALS Value .
 
-    LBRACKET        reduce using rule 18 (Value -> IP .)
-    KEY             reduce using rule 18 (Value -> IP .)
-    $end            reduce using rule 18 (Value -> IP .)
-    COMMENT         reduce using rule 18 (Value -> IP .)
-    COMMA           reduce using rule 18 (Value -> IP .)
-    RBRACKET        reduce using rule 18 (Value -> IP .)
+    LBRACKET        reduce using rule 17 (Content -> Key EQUALS Value .)
+    KEY             reduce using rule 17 (Content -> Key EQUALS Value .)
+    $end            reduce using rule 17 (Content -> Key EQUALS Value .)
+    COMMENT         reduce using rule 17 (Content -> Key EQUALS Value .)
 
 
 state 17
 
-    (19) Value -> DATE .
+    (19) Value -> STRING .
 
-    LBRACKET        reduce using rule 19 (Value -> DATE .)
-    KEY             reduce using rule 19 (Value -> DATE .)
-    $end            reduce using rule 19 (Value -> DATE .)
-    COMMENT         reduce using rule 19 (Value -> DATE .)
-    COMMA           reduce using rule 19 (Value -> DATE .)
-    RBRACKET        reduce using rule 19 (Value -> DATE .)
+    LBRACKET        reduce using rule 19 (Value -> STRING .)
+    KEY             reduce using rule 19 (Value -> STRING .)
+    $end            reduce using rule 19 (Value -> STRING .)
+    COMMENT         reduce using rule 19 (Value -> STRING .)
+    COMMA           reduce using rule 19 (Value -> STRING .)
+    RBRACKET        reduce using rule 19 (Value -> STRING .)
 
 
 state 18
 
-    (20) Value -> TIME .
+    (20) Value -> NUMBER .
 
-    LBRACKET        reduce using rule 20 (Value -> TIME .)
-    KEY             reduce using rule 20 (Value -> TIME .)
-    $end            reduce using rule 20 (Value -> TIME .)
-    COMMENT         reduce using rule 20 (Value -> TIME .)
-    COMMA           reduce using rule 20 (Value -> TIME .)
-    RBRACKET        reduce using rule 20 (Value -> TIME .)
+    LBRACKET        reduce using rule 20 (Value -> NUMBER .)
+    KEY             reduce using rule 20 (Value -> NUMBER .)
+    $end            reduce using rule 20 (Value -> NUMBER .)
+    COMMENT         reduce using rule 20 (Value -> NUMBER .)
+    COMMA           reduce using rule 20 (Value -> NUMBER .)
+    RBRACKET        reduce using rule 20 (Value -> NUMBER .)
 
 
 state 19
 
-    (21) Value -> BOOLEAN .
+    (21) Value -> IP .
 
-    LBRACKET        reduce using rule 21 (Value -> BOOLEAN .)
-    KEY             reduce using rule 21 (Value -> BOOLEAN .)
-    $end            reduce using rule 21 (Value -> BOOLEAN .)
-    COMMENT         reduce using rule 21 (Value -> BOOLEAN .)
-    COMMA           reduce using rule 21 (Value -> BOOLEAN .)
-    RBRACKET        reduce using rule 21 (Value -> BOOLEAN .)
+    LBRACKET        reduce using rule 21 (Value -> IP .)
+    KEY             reduce using rule 21 (Value -> IP .)
+    $end            reduce using rule 21 (Value -> IP .)
+    COMMENT         reduce using rule 21 (Value -> IP .)
+    COMMA           reduce using rule 21 (Value -> IP .)
+    RBRACKET        reduce using rule 21 (Value -> IP .)
 
 
 state 20
 
-    (22) Value -> Array .
+    (22) Value -> DATE .
 
-    LBRACKET        reduce using rule 22 (Value -> Array .)
-    KEY             reduce using rule 22 (Value -> Array .)
-    $end            reduce using rule 22 (Value -> Array .)
-    COMMENT         reduce using rule 22 (Value -> Array .)
-    COMMA           reduce using rule 22 (Value -> Array .)
-    RBRACKET        reduce using rule 22 (Value -> Array .)
+    LBRACKET        reduce using rule 22 (Value -> DATE .)
+    KEY             reduce using rule 22 (Value -> DATE .)
+    $end            reduce using rule 22 (Value -> DATE .)
+    COMMENT         reduce using rule 22 (Value -> DATE .)
+    COMMA           reduce using rule 22 (Value -> DATE .)
+    RBRACKET        reduce using rule 22 (Value -> DATE .)
 
 
 state 21
 
-    (23) Array -> LBRACKET . Value_list RBRACKET
-    (24) Value_list -> . Value COMMA Value_list
-    (25) Value_list -> . Value
-    (16) Value -> . STRING
-    (17) Value -> . NUMBER
-    (18) Value -> . IP
-    (19) Value -> . DATE
-    (20) Value -> . TIME
-    (21) Value -> . BOOLEAN
-    (22) Value -> . Array
-    (23) Array -> . LBRACKET Value_list RBRACKET
+    (23) Value -> TIME .
 
-    STRING          shift and go to state 14
-    NUMBER          shift and go to state 15
-    IP              shift and go to state 16
-    DATE            shift and go to state 17
-    TIME            shift and go to state 18
-    BOOLEAN         shift and go to state 19
-    LBRACKET        shift and go to state 21
+    LBRACKET        reduce using rule 23 (Value -> TIME .)
+    KEY             reduce using rule 23 (Value -> TIME .)
+    $end            reduce using rule 23 (Value -> TIME .)
+    COMMENT         reduce using rule 23 (Value -> TIME .)
+    COMMA           reduce using rule 23 (Value -> TIME .)
+    RBRACKET        reduce using rule 23 (Value -> TIME .)
 
-    Value_list                     shift and go to state 27
-    Value                          shift and go to state 28
-    Array                          shift and go to state 20
 
 state 22
 
-    (7) Subsection -> LBRACKET . Subsection_name RBRACKET Section_content Subsection
-    (8) Subsection -> LBRACKET . Subsection_name RBRACKET Section_content
-    (10) Subsection_name -> . SUBOBJECT
+    (24) Value -> BOOLEAN .
 
-    SUBOBJECT       shift and go to state 30
+    LBRACKET        reduce using rule 24 (Value -> BOOLEAN .)
+    KEY             reduce using rule 24 (Value -> BOOLEAN .)
+    $end            reduce using rule 24 (Value -> BOOLEAN .)
+    COMMENT         reduce using rule 24 (Value -> BOOLEAN .)
+    COMMA           reduce using rule 24 (Value -> BOOLEAN .)
+    RBRACKET        reduce using rule 24 (Value -> BOOLEAN .)
 
-    Subsection_name                shift and go to state 29
 
 state 23
+
+    (25) Value -> Array .
+
+    LBRACKET        reduce using rule 25 (Value -> Array .)
+    KEY             reduce using rule 25 (Value -> Array .)
+    $end            reduce using rule 25 (Value -> Array .)
+    COMMENT         reduce using rule 25 (Value -> Array .)
+    COMMA           reduce using rule 25 (Value -> Array .)
+    RBRACKET        reduce using rule 25 (Value -> Array .)
+
+
+state 24
+
+    (26) Array -> LBRACKET . Value_list RBRACKET
+    (27) Value_list -> . Value COMMA Value_list
+    (28) Value_list -> . Value
+    (19) Value -> . STRING
+    (20) Value -> . NUMBER
+    (21) Value -> . IP
+    (22) Value -> . DATE
+    (23) Value -> . TIME
+    (24) Value -> . BOOLEAN
+    (25) Value -> . Array
+    (26) Array -> . LBRACKET Value_list RBRACKET
+
+    STRING          shift and go to state 17
+    NUMBER          shift and go to state 18
+    IP              shift and go to state 19
+    DATE            shift and go to state 20
+    TIME            shift and go to state 21
+    BOOLEAN         shift and go to state 22
+    LBRACKET        shift and go to state 24
+
+    Value_list                     shift and go to state 31
+    Value                          shift and go to state 32
+    Array                          shift and go to state 23
+
+state 25
+
+    (8) Table -> LBRACKET LBRACKET Section_name RBRACKET . RBRACKET Section_content Table
+    (9) Table -> LBRACKET LBRACKET Section_name RBRACKET . RBRACKET Section_content
+
+    RBRACKET        shift and go to state 33
+
+
+state 26
+
+    (10) Subsection -> LBRACKET . Subsection_name RBRACKET Section_content Subsection
+    (11) Subsection -> LBRACKET . Subsection_name RBRACKET Section_content
+    (13) Subsection_name -> . SUBOBJECT
+
+    SUBOBJECT       shift and go to state 35
+
+    Subsection_name                shift and go to state 34
+
+state 27
 
     (4) Section -> LBRACKET Section_name RBRACKET Section_content .
 
@@ -357,7 +407,7 @@ state 23
     $end            reduce using rule 4 (Section -> LBRACKET Section_name RBRACKET Section_content .)
 
 
-state 24
+state 28
 
     (5) Section -> LBRACKET Section_name RBRACKET Subsection .
 
@@ -366,165 +416,216 @@ state 24
     $end            reduce using rule 5 (Section -> LBRACKET Section_name RBRACKET Subsection .)
 
 
-state 25
-
-    (11) Section_content -> Content . Section_content
-    (12) Section_content -> Content .
-    (11) Section_content -> . Content Section_content
-    (12) Section_content -> . Content
-    (13) Section_content -> . COMMENT
-    (14) Content -> . Key EQUALS Value
-    (15) Key -> . KEY
-
-  ! shift/reduce conflict for KEY resolved as shift
-    LBRACKET        reduce using rule 12 (Section_content -> Content .)
-    $end            reduce using rule 12 (Section_content -> Content .)
-    COMMENT         shift and go to state 26
-    KEY             shift and go to state 7
-
-  ! KEY             [ reduce using rule 12 (Section_content -> Content .) ]
-
-    Content                        shift and go to state 25
-    Section_content                shift and go to state 31
-    Key                            shift and go to state 6
-
-state 26
-
-    (13) Section_content -> COMMENT .
-
-    LBRACKET        reduce using rule 13 (Section_content -> COMMENT .)
-    KEY             reduce using rule 13 (Section_content -> COMMENT .)
-    $end            reduce using rule 13 (Section_content -> COMMENT .)
-
-
-state 27
-
-    (23) Array -> LBRACKET Value_list . RBRACKET
-
-    RBRACKET        shift and go to state 32
-
-
-state 28
-
-    (24) Value_list -> Value . COMMA Value_list
-    (25) Value_list -> Value .
-
-    COMMA           shift and go to state 33
-    RBRACKET        reduce using rule 25 (Value_list -> Value .)
-
-
 state 29
 
-    (7) Subsection -> LBRACKET Subsection_name . RBRACKET Section_content Subsection
-    (8) Subsection -> LBRACKET Subsection_name . RBRACKET Section_content
+    (14) Section_content -> Content . Section_content
+    (15) Section_content -> Content .
+    (14) Section_content -> . Content Section_content
+    (15) Section_content -> . Content
+    (16) Section_content -> . COMMENT
+    (17) Content -> . Key EQUALS Value
+    (18) Key -> . KEY
 
-    RBRACKET        shift and go to state 34
+  ! shift/reduce conflict for KEY resolved as shift
+    LBRACKET        reduce using rule 15 (Section_content -> Content .)
+    $end            reduce using rule 15 (Section_content -> Content .)
+    COMMENT         shift and go to state 30
+    KEY             shift and go to state 8
 
+  ! KEY             [ reduce using rule 15 (Section_content -> Content .) ]
+
+    Content                        shift and go to state 29
+    Section_content                shift and go to state 36
+    Key                            shift and go to state 7
 
 state 30
 
-    (10) Subsection_name -> SUBOBJECT .
+    (16) Section_content -> COMMENT .
 
-    RBRACKET        reduce using rule 10 (Subsection_name -> SUBOBJECT .)
+    LBRACKET        reduce using rule 16 (Section_content -> COMMENT .)
+    KEY             reduce using rule 16 (Section_content -> COMMENT .)
+    $end            reduce using rule 16 (Section_content -> COMMENT .)
 
 
 state 31
 
-    (11) Section_content -> Content Section_content .
+    (26) Array -> LBRACKET Value_list . RBRACKET
 
-    LBRACKET        reduce using rule 11 (Section_content -> Content Section_content .)
-    KEY             reduce using rule 11 (Section_content -> Content Section_content .)
-    $end            reduce using rule 11 (Section_content -> Content Section_content .)
+    RBRACKET        shift and go to state 37
 
 
 state 32
 
-    (23) Array -> LBRACKET Value_list RBRACKET .
+    (27) Value_list -> Value . COMMA Value_list
+    (28) Value_list -> Value .
 
-    LBRACKET        reduce using rule 23 (Array -> LBRACKET Value_list RBRACKET .)
-    KEY             reduce using rule 23 (Array -> LBRACKET Value_list RBRACKET .)
-    $end            reduce using rule 23 (Array -> LBRACKET Value_list RBRACKET .)
-    COMMENT         reduce using rule 23 (Array -> LBRACKET Value_list RBRACKET .)
-    COMMA           reduce using rule 23 (Array -> LBRACKET Value_list RBRACKET .)
-    RBRACKET        reduce using rule 23 (Array -> LBRACKET Value_list RBRACKET .)
+    COMMA           shift and go to state 38
+    RBRACKET        reduce using rule 28 (Value_list -> Value .)
 
 
 state 33
 
-    (24) Value_list -> Value COMMA . Value_list
-    (24) Value_list -> . Value COMMA Value_list
-    (25) Value_list -> . Value
-    (16) Value -> . STRING
-    (17) Value -> . NUMBER
-    (18) Value -> . IP
-    (19) Value -> . DATE
-    (20) Value -> . TIME
-    (21) Value -> . BOOLEAN
-    (22) Value -> . Array
-    (23) Array -> . LBRACKET Value_list RBRACKET
+    (8) Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET . Section_content Table
+    (9) Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET . Section_content
+    (14) Section_content -> . Content Section_content
+    (15) Section_content -> . Content
+    (16) Section_content -> . COMMENT
+    (17) Content -> . Key EQUALS Value
+    (18) Key -> . KEY
 
-    STRING          shift and go to state 14
-    NUMBER          shift and go to state 15
-    IP              shift and go to state 16
-    DATE            shift and go to state 17
-    TIME            shift and go to state 18
-    BOOLEAN         shift and go to state 19
-    LBRACKET        shift and go to state 21
+    COMMENT         shift and go to state 30
+    KEY             shift and go to state 8
 
-    Value                          shift and go to state 28
-    Value_list                     shift and go to state 35
-    Array                          shift and go to state 20
+    Section_content                shift and go to state 39
+    Content                        shift and go to state 29
+    Key                            shift and go to state 7
 
 state 34
 
-    (7) Subsection -> LBRACKET Subsection_name RBRACKET . Section_content Subsection
-    (8) Subsection -> LBRACKET Subsection_name RBRACKET . Section_content
-    (11) Section_content -> . Content Section_content
-    (12) Section_content -> . Content
-    (13) Section_content -> . COMMENT
-    (14) Content -> . Key EQUALS Value
-    (15) Key -> . KEY
+    (10) Subsection -> LBRACKET Subsection_name . RBRACKET Section_content Subsection
+    (11) Subsection -> LBRACKET Subsection_name . RBRACKET Section_content
 
-    COMMENT         shift and go to state 26
-    KEY             shift and go to state 7
+    RBRACKET        shift and go to state 40
 
-    Section_content                shift and go to state 36
-    Content                        shift and go to state 25
-    Key                            shift and go to state 6
 
 state 35
 
-    (24) Value_list -> Value COMMA Value_list .
+    (13) Subsection_name -> SUBOBJECT .
 
-    RBRACKET        reduce using rule 24 (Value_list -> Value COMMA Value_list .)
+    RBRACKET        reduce using rule 13 (Subsection_name -> SUBOBJECT .)
 
 
 state 36
 
-    (7) Subsection -> LBRACKET Subsection_name RBRACKET Section_content . Subsection
-    (8) Subsection -> LBRACKET Subsection_name RBRACKET Section_content .
-    (7) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content Subsection
-    (8) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content
+    (14) Section_content -> Content Section_content .
 
-  ! shift/reduce conflict for LBRACKET resolved as shift
-    KEY             reduce using rule 8 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content .)
-    $end            reduce using rule 8 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content .)
-    LBRACKET        shift and go to state 22
+    LBRACKET        reduce using rule 14 (Section_content -> Content Section_content .)
+    KEY             reduce using rule 14 (Section_content -> Content Section_content .)
+    $end            reduce using rule 14 (Section_content -> Content Section_content .)
 
-  ! LBRACKET        [ reduce using rule 8 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content .) ]
-
-    Subsection                     shift and go to state 37
 
 state 37
 
-    (7) Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .
+    (26) Array -> LBRACKET Value_list RBRACKET .
 
-    LBRACKET        reduce using rule 7 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .)
-    KEY             reduce using rule 7 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .)
-    $end            reduce using rule 7 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .)
+    LBRACKET        reduce using rule 26 (Array -> LBRACKET Value_list RBRACKET .)
+    KEY             reduce using rule 26 (Array -> LBRACKET Value_list RBRACKET .)
+    $end            reduce using rule 26 (Array -> LBRACKET Value_list RBRACKET .)
+    COMMENT         reduce using rule 26 (Array -> LBRACKET Value_list RBRACKET .)
+    COMMA           reduce using rule 26 (Array -> LBRACKET Value_list RBRACKET .)
+    RBRACKET        reduce using rule 26 (Array -> LBRACKET Value_list RBRACKET .)
+
+
+state 38
+
+    (27) Value_list -> Value COMMA . Value_list
+    (27) Value_list -> . Value COMMA Value_list
+    (28) Value_list -> . Value
+    (19) Value -> . STRING
+    (20) Value -> . NUMBER
+    (21) Value -> . IP
+    (22) Value -> . DATE
+    (23) Value -> . TIME
+    (24) Value -> . BOOLEAN
+    (25) Value -> . Array
+    (26) Array -> . LBRACKET Value_list RBRACKET
+
+    STRING          shift and go to state 17
+    NUMBER          shift and go to state 18
+    IP              shift and go to state 19
+    DATE            shift and go to state 20
+    TIME            shift and go to state 21
+    BOOLEAN         shift and go to state 22
+    LBRACKET        shift and go to state 24
+
+    Value                          shift and go to state 32
+    Value_list                     shift and go to state 41
+    Array                          shift and go to state 23
+
+state 39
+
+    (8) Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content . Table
+    (9) Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content .
+    (8) Table -> . LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table
+    (9) Table -> . LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content
+
+  ! shift/reduce conflict for LBRACKET resolved as shift
+    KEY             reduce using rule 9 (Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content .)
+    $end            reduce using rule 9 (Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content .)
+    LBRACKET        shift and go to state 42
+
+  ! LBRACKET        [ reduce using rule 9 (Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content .) ]
+
+    Table                          shift and go to state 43
+
+state 40
+
+    (10) Subsection -> LBRACKET Subsection_name RBRACKET . Section_content Subsection
+    (11) Subsection -> LBRACKET Subsection_name RBRACKET . Section_content
+    (14) Section_content -> . Content Section_content
+    (15) Section_content -> . Content
+    (16) Section_content -> . COMMENT
+    (17) Content -> . Key EQUALS Value
+    (18) Key -> . KEY
+
+    COMMENT         shift and go to state 30
+    KEY             shift and go to state 8
+
+    Section_content                shift and go to state 44
+    Content                        shift and go to state 29
+    Key                            shift and go to state 7
+
+state 41
+
+    (27) Value_list -> Value COMMA Value_list .
+
+    RBRACKET        reduce using rule 27 (Value_list -> Value COMMA Value_list .)
+
+
+state 42
+
+    (8) Table -> LBRACKET . LBRACKET Section_name RBRACKET RBRACKET Section_content Table
+    (9) Table -> LBRACKET . LBRACKET Section_name RBRACKET RBRACKET Section_content
+
+    LBRACKET        shift and go to state 10
+
+
+state 43
+
+    (8) Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table .
+
+    LBRACKET        reduce using rule 8 (Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table .)
+    KEY             reduce using rule 8 (Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table .)
+    $end            reduce using rule 8 (Table -> LBRACKET LBRACKET Section_name RBRACKET RBRACKET Section_content Table .)
+
+
+state 44
+
+    (10) Subsection -> LBRACKET Subsection_name RBRACKET Section_content . Subsection
+    (11) Subsection -> LBRACKET Subsection_name RBRACKET Section_content .
+    (10) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content Subsection
+    (11) Subsection -> . LBRACKET Subsection_name RBRACKET Section_content
+
+  ! shift/reduce conflict for LBRACKET resolved as shift
+    KEY             reduce using rule 11 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content .)
+    $end            reduce using rule 11 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content .)
+    LBRACKET        shift and go to state 26
+
+  ! LBRACKET        [ reduce using rule 11 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content .) ]
+
+    Subsection                     shift and go to state 45
+
+state 45
+
+    (10) Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .
+
+    LBRACKET        reduce using rule 10 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .)
+    KEY             reduce using rule 10 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .)
+    $end            reduce using rule 10 (Subsection -> LBRACKET Subsection_name RBRACKET Section_content Subsection .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for KEY in state 25 resolved as shift
-WARNING: shift/reduce conflict for LBRACKET in state 36 resolved as shift
+WARNING: shift/reduce conflict for KEY in state 29 resolved as shift
+WARNING: shift/reduce conflict for LBRACKET in state 39 resolved as shift
+WARNING: shift/reduce conflict for LBRACKET in state 44 resolved as shift
