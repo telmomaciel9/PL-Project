@@ -1,5 +1,6 @@
 import sys
 import os
+import toml
 
 
 while True:
@@ -14,6 +15,18 @@ while True:
     path = input("Digite o path do ficheiro a testar: ")
 
     if os.path.exists(path):
+
+        # Leitura do arquivo TOML
+        with open(path) as file:
+            data = file.read()
+
+        try:
+            # Parsing do arquivo TOML
+            parsed_data = toml.loads(data)
+            print("O arquivo TOML está formatado corretamente.")
+        except toml.TomlDecodeError as e:
+            print("Erro ao decodificar o arquivo TOML:")
+            print(e)
 
         while True:
 

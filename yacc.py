@@ -25,11 +25,14 @@ import ply.yacc as yacc
 # P15 :                 | COMMENT
 # P16 : Content         : Key '=' Value
 # P17 : Key             : KEY
-# P18 : Value           : STRING
+# P18 : Value           : BASIC_STRING
+#                       | LITERAL_STRING
+#                       | STRING
 # P19 :                 | NUMBER
 # P20 :                 | IP
 # P21 :                 | DATE
 # P22 :                 | TIME
+# P23 :                 | DATE_TIME
 # P23 :                 | BOOLEAN
 # P24 :                 | Array
 # P25 : Array           : '[' Value_list ']'
@@ -122,6 +125,7 @@ def p_Value(p):
              | TIME
              | BOOLEAN
              | Array
+             | DATE_TIME
             '''
     p[0] = p[1]
 

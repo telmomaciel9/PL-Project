@@ -5,10 +5,13 @@ import re
 from menu import path, linguagem
 
 tokens = (
+    'BASIC_STRING',
+    'LITERAL_STRING',
     'STRING',
     'COMMENT',
     'NUMBER',
     'IP',
+    'DATE_TIME',
     'DATE',
     'TIME',
     'BOOLEAN',
@@ -20,11 +23,23 @@ tokens = (
     'RBRACKET',
     'EQUALS',
     'COMMA',
+
 )
 
 literals = '-:.",=[]'
 
 t_ignore = ' \t\n'
+
+def t_BASIC_STRING(t):
+    r'\'\'\'((.|\n)*?)\'\'\''
+    t.value = str(t.value[3:-3])
+    return t
+
+
+def t_LITERAL_STRING(t):
+    r'\"\"\"((.|\n)*?)\"\"\"'
+    t.value = str(t.value[3:-3])
+    return t
 
 def t_BOOLEAN(t): 
     r'TRUE|FALSE|true|false'
@@ -34,6 +49,11 @@ def t_BOOLEAN(t):
 def t_IP(t): 
     r'\"\d+\.\d+\.\d+\.\d+\"'
     t.value = t.value[1:-1]  # Remove aspas
+    return t
+
+def t_DATE_TIME(t):
+    r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z?'
+    t.value = str(t.value)
     return t
 
 def t_DATE(t): 
@@ -102,4 +122,4 @@ while True:
     tok = lexer.token()
     if not tok:
         break
-    #print(tok)    
+    print(tok)    
